@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AdminController"
+            style="-fx-background-color: #1a1a2e;">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="0"
+              style="-fx-background-color: #16213e; -fx-padding: 0 24 0 0;
+                     -fx-effect: dropshadow(gaussian, #000, 8, 0.3, 0, 2);">
+            <Label text="💪 ФИТНЕС КЛУБ — АДМИН"
+                   style="-fx-font-size: 17; -fx-font-weight: bold;
+                          -fx-text-fill: #e94560; -fx-padding: 16 32 16 24;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Выйти" onAction="#logout"
+                    style="-fx-background-color: #e94560; -fx-text-fill: white;
+                           -fx-font-size: 12; -fx-background-radius: 6;
+                           -fx-padding: 8 16 8 16; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane style="-fx-background-color: #1a1a2e; -fx-tab-min-width: 160;">
+
+            <!-- Пользователи -->
+            <Tab text="👥  Пользователи" closable="false">
+                <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #1a1a2e;">
+                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #16213e; -fx-background-radius: 10;">
+                        <columns>
+                            <TableColumn fx:id="uNameCol"       text="Имя"         prefWidth="180"/>
+                            <TableColumn fx:id="uEmailCol"      text="Email"        prefWidth="180"/>
+                            <TableColumn fx:id="uPhoneCol"      text="Телефон"      prefWidth="130"/>
+                            <TableColumn fx:id="uMemberCol"     text="Абонемент"    prefWidth="130"/>
+                            <TableColumn fx:id="uMemberEndCol"  text="Действует до" prefWidth="130"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Нет пользователей" style="-fx-text-fill: #8892a4;"/>
+                        </placeholder>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button text="Назначить абонемент" onAction="#assignMembership"
+                                style="-fx-background-color: #e94560; -fx-text-fill: white;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                        <Button text="Удалить пользователя" onAction="#deleteUser"
+                                style="-fx-background-color: #0f3460; -fx-text-fill: #e94560;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- Тренировки -->
+            <Tab text="🏋  Тренировки" closable="false" onSelectionChanged="#onTrainingsAdminTab">
+                <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #1a1a2e;">
+                    <TableView fx:id="adminTrainingsTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #16213e; -fx-background-radius: 10;">
+                        <columns>
+                            <TableColumn fx:id="atTitleCol"   text="Тренировка" prefWidth="180"/>
+                            <TableColumn fx:id="atTrainerCol" text="Тренер"     prefWidth="150"/>
+                            <TableColumn fx:id="atDateCol"    text="Дата"       prefWidth="110"/>
+                            <TableColumn fx:id="atTimeCol"    text="Время"      prefWidth="80"/>
+                            <TableColumn fx:id="atCapCol"     text="Мест"       prefWidth="70"/>
+                            <TableColumn fx:id="atSlotsCol"   text="Занято"     prefWidth="80"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Нет тренировок" style="-fx-text-fill: #8892a4;"/>
+                        </placeholder>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button text="Добавить" onAction="#addTraining"
+                                style="-fx-background-color: #e94560; -fx-text-fill: white;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                        <Button text="Редактировать" onAction="#editTraining"
+                                style="-fx-background-color: #0f3460; -fx-text-fill: #c0c8d8;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                        <Button text="Удалить" onAction="#deleteTraining"
+                                style="-fx-background-color: #0f3460; -fx-text-fill: #e94560;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- Абонементы -->
+            <Tab text="🎫  Абонементы" closable="false" onSelectionChanged="#onMembershipsTab">
+                <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #1a1a2e;">
+                    <TableView fx:id="membershipsTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #16213e; -fx-background-radius: 10;">
+                        <columns>
+                            <TableColumn fx:id="mNameCol"     text="Название"   prefWidth="160"/>
+                            <TableColumn fx:id="mDescCol"     text="Описание"   prefWidth="240"/>
+                            <TableColumn fx:id="mDaysCol"     text="Дней"       prefWidth="80"/>
+                            <TableColumn fx:id="mPriceCol"    text="Цена (₽)"   prefWidth="100"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Нет абонементов" style="-fx-text-fill: #8892a4;"/>
+                        </placeholder>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button text="Добавить" onAction="#addMembership"
+                                style="-fx-background-color: #e94560; -fx-text-fill: white;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                        <Button text="Редактировать" onAction="#editMembership"
+                                style="-fx-background-color: #0f3460; -fx-text-fill: #c0c8d8;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                        <Button text="Удалить" onAction="#deleteMembership"
+                                style="-fx-background-color: #0f3460; -fx-text-fill: #e94560;
+                                       -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

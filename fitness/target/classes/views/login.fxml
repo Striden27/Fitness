@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.LoginController"
+      alignment="CENTER" spacing="0"
+      style="-fx-background-color: #1a1a2e;">
+
+    <VBox alignment="CENTER" spacing="24"
+          style="-fx-background-color: #16213e; -fx-background-radius: 16;
+                 -fx-padding: 48 56 48 56; -fx-effect: dropshadow(gaussian, #000, 24, 0.4, 0, 4);"
+          maxWidth="400" maxHeight="520">
+
+        <!-- Логотип -->
+        <VBox alignment="CENTER" spacing="6">
+            <Label text="💪" style="-fx-font-size: 48;"/>
+            <Label text="ФИТНЕС КЛУБ"
+                   style="-fx-font-size: 22; -fx-font-weight: bold;
+                          -fx-text-fill: #e94560; -fx-letter-spacing: 3;"/>
+            <Label text="Личный кабинет"
+                   style="-fx-font-size: 13; -fx-text-fill: #8892a4;"/>
+        </VBox>
+
+        <!-- Поля -->
+        <VBox spacing="12" style="-fx-padding: 16 0 0 0;">
+            <TextField fx:id="emailField" promptText="Email"
+                       style="-fx-background-color: #0f3460; -fx-text-fill: white;
+                              -fx-prompt-text-fill: #8892a4; -fx-background-radius: 8;
+                              -fx-padding: 12 16 12 16; -fx-font-size: 14; -fx-border-width: 0;"/>
+            <PasswordField fx:id="passwordField" promptText="Пароль"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: white;
+                                  -fx-prompt-text-fill: #8892a4; -fx-background-radius: 8;
+                                  -fx-padding: 12 16 12 16; -fx-font-size: 14; -fx-border-width: 0;"/>
+        </VBox>
+
+        <!-- Кнопки -->
+        <VBox spacing="10" style="-fx-padding: 8 0 0 0;">
+            <Button text="ВОЙТИ" onAction="#login" maxWidth="Infinity"
+                    style="-fx-background-color: #e94560; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-font-size: 14;
+                           -fx-background-radius: 8; -fx-padding: 12 0 12 0;
+                           -fx-cursor: hand;"/>
+            <Button text="Зарегистрироваться" onAction="#goToRegister" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: #8892a4;
+                           -fx-font-size: 13; -fx-cursor: hand; -fx-border-width: 0;"/>
+        </VBox>
+    </VBox>
+</VBox>
